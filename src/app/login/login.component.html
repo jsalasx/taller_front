@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row">
+    <div class="col-4">
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+        <!-- Email input -->
+        <div class="form-outline mb-4">
+          <img src="../../assets/logo.png">
+        </div>
+        <div class="form-outline mb-4">
+          <input type="text" id="form2Example1" class="form-control" formControlName="usuario" placeholder="Usuario" />
+
+        </div>
+
+        <!-- Password input -->
+        <div class="form-outline mb-4">
+          <input type="password" id="form2Example2" class="form-control" formControlName="clave"
+            placeholder="Contraseña" />
+
+        </div>
+
+
+        <div class="alert alert-danger" *ngIf=errorStatus>
+          <span>{{ errorMsj }}</span>
+        </div>
+        <!-- Submit button -->
+        <button type="submit" class="btn btn-primary btn-block mb-4">Ingresar</button>
+
+        <!-- Register buttons -->
+
+      </form>
+    </div>
+  </div>
+</div>
