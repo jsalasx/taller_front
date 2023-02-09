@@ -20,7 +20,7 @@ import { MantenimientoComponent } from './mantenimiento/mantenimiento.component'
     ReactiveFormsModule,
     FormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

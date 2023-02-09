@@ -1,3 +1,5 @@
+<hr>
+<hr>
 <div class="container">
   <div class="row">
     <div class="col-12">
@@ -5,10 +7,12 @@
 
 
     </div>
+    <hr>
     <div class="col-12">
       <form [formGroup]="formBuscarPorPlaca">
-        <input type="text" formControlName="placa">
+        <input type="text" class="form-control" formControlName="placa">
         <button class="btn btn-secondary" (click)="buscarPorPlaca()">Buscar</button>
+        <div><span class="text-primary">Si buscas en blanco traera todas las citas</span></div>
       </form>
     </div>
   </div>
@@ -67,27 +71,54 @@
       <div class="mb-3">
         <label for="dateOfBirth">Placa</label>
         <div class="input-group">
-          <input type="text" class="form-control" formControlName="placa">
+          <input type="text" class="form-control" formControlName="placa" [class.is-invalid]="campoInvalido('placa')">
+        </div>
+        <br>
+        <div class="text-danger" *ngIf="campoInvalido('placa')">
+          Campo obligatorio
         </div>
         <label for="dateOfBirth">Fecha Mantenimiento</label>
         <div class="input-group">
-          <input type="date" class="form-control" formControlName="fecha">
-          <select class="form-select" formControlName="hora">
+          <input type="date" class="form-control" formControlName="fecha" [class.is-invalid]="campoInvalido('fecha')">
+
+          <select class="form-select" formControlName="hora" [class.is-invalid]="campoInvalido('hora')">
             <option value="">Escoja la hora del mantenimiento</option>
             <option [ngValue]="hora" *ngFor="let hora of horario">{{ hora }}</option>
           </select>
+
+        </div>
+        <div class="text-danger" *ngIf="campoInvalido('fecha')">
+          Campo obligatorio
+        </div>
+        <div class="text-danger" *ngIf="campoInvalido('hora')">
+          Campo obligatorio
         </div>
         <label for="dateOfBirth">Tipo Vehículo</label>
         <div class="input-group">
-          <input type="text" class="form-control" formControlName="tipoVehiculo">
+          <input type="text" class="form-control" formControlName="tipoVehiculo"
+            [class.is-invalid]="campoInvalido('tipoVehiculo')">
+        </div>
+        <div class="text-danger" *ngIf="campoInvalido('tipoVehiculo')">
+          Campo obligatorio
         </div>
         <label for="dateOfBirth">Cliente</label>
         <div class="input-group">
-          <input type="text" class="form-control" formControlName="cliente">
+          <input type="text" class="form-control" formControlName="cliente"
+            [class.is-invalid]="campoInvalido('cliente')">
+
+        </div>
+        <div class="text-danger" *ngIf="campoInvalido('cliente')">
+          Campo obligatorio
         </div>
         <label for="dateOfBirth">Telefono</label>
         <div class="input-group">
-          <input type="text" class="form-control" formControlName="telefono">
+          <input type="number" class="form-control" formControlName="telefono"
+            [class.is-invalid]="campoInvalido('telefono')">
+
+
+        </div>
+        <div class="text-danger" *ngIf="campoInvalido('telefono')">
+          Campo obligatorio
         </div>
         <label for="dateOfBirth">Observacion</label>
         <div class="input-group">
@@ -101,7 +132,8 @@
     <div class="alert alert-danger" *ngIf=errorStatusModal>
       <span>{{ errorMsjModal }}</span>
     </div>
-    <button type="submit" class="btn btn-outline-dark" (click)="guardarMantenimiento()">Save</button>
+    <button type="submit" class="btn btn-outline-dark" [disabled]="formNuevoMantenimiento.invalid"
+      (click)="guardarMantenimiento()">Save</button>
   </div>
 </ng-template>
 

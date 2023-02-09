@@ -27,7 +27,7 @@ export class MantenimientoComponent implements OnInit {
     tipoVehiculo: new FormControl('', Validators.required),
     cliente: new FormControl('', Validators.required),
     telefono: new FormControl('', Validators.required),
-    observacion: new FormControl('', Validators.required),
+    observacion: new FormControl(''),
   })
 
   formBuscarPorPlaca = new FormGroup({
@@ -95,6 +95,10 @@ ngOnInit(): void {
       }
 
     })
+  }
+
+  campoInvalido(campo:any) {
+    return this.formNuevoMantenimiento.get(campo)?.invalid  && this.formNuevoMantenimiento.get(campo)?.touched
   }
 
   buscarPorPlaca() {

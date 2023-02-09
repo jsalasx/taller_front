@@ -41,4 +41,8 @@ export class LoginComponent {
     });
 
   }
+
+  campoInvalido(campo:any) {
+    return this.loginForm.get(campo)?.invalid  && this.loginForm.get(campo)?.touched
+  }
 }
