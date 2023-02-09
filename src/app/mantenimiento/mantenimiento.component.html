@@ -1,1 +1,110 @@
-<p>mantenimiento works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <button class="btn btn-primary" (click)="open(content)">Nuevo</button>
+
+
+    </div>
+    <div class="col-12">
+      <form [formGroup]="formBuscarPorPlaca">
+        <input type="text" formControlName="placa">
+        <button class="btn btn-secondary" (click)="buscarPorPlaca()">Buscar</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Cliente</th>
+            <th>Tipo Vehiculo</th>
+            <th>Placa</th>
+            <th>Fecha Mantenimiento</th>
+            <th>Telefono</th>
+            <th>Estado</th>
+            <th>Observacion</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let mantenimiento of mantenimientos">
+            <td>{{ mantenimiento.id }}</td>
+            <td>{{ mantenimiento.cliente }}</td>
+            <td>{{ mantenimiento.tipoVehiculo }}</td>
+            <td>{{ mantenimiento.placa }}</td>
+            <td>{{ mantenimiento.fechaMantenimiento }}</td>
+            <td>{{ mantenimiento.telefono }}</td>
+            <td>{{ mantenimiento.estado }}</td>
+            <td>{{ mantenimiento.observacion }}</td>
+            <td><button *ngIf="mantenimiento.estado != 'ATENDIDA' " class="btn btn-success" title="Cambiar estado"
+                (click)="cambiarEstado(mantenimiento.id)">
+                Cambiar estado</button></td>
+
+          </tr>
+        </tbody>
+      </table>
+      <div class="alert alert-danger" *ngIf=errorStatus>
+        <span>{{ errorMsj }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Nuevo Mantenimiento</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="formNuevoMantenimiento">
+      <div class="mb-3">
+        <label for="dateOfBirth">Placa</label>
+        <div class="input-group">
+          <input type="text" class="form-control" formControlName="placa">
+        </div>
+        <label for="dateOfBirth">Fecha Mantenimiento</label>
+        <div class="input-group">
+          <input type="date" class="form-control" formControlName="fecha">
+          <select class="form-select" formControlName="hora">
+            <option value="">Escoja la hora del mantenimiento</option>
+            <option [ngValue]="hora" *ngFor="let hora of horario">{{ hora }}</option>
+          </select>
+        </div>
+        <label for="dateOfBirth">Tipo Vehículo</label>
+        <div class="input-group">
+          <input type="text" class="form-control" formControlName="tipoVehiculo">
+        </div>
+        <label for="dateOfBirth">Cliente</label>
+        <div class="input-group">
+          <input type="text" class="form-control" formControlName="cliente">
+        </div>
+        <label for="dateOfBirth">Telefono</label>
+        <div class="input-group">
+          <input type="text" class="form-control" formControlName="telefono">
+        </div>
+        <label for="dateOfBirth">Observacion</label>
+        <div class="input-group">
+          <textarea class="form-control" formControlName="observacion"></textarea>
+        </div>
+      </div>
+    </form>
+
+  </div>
+  <div class="modal-footer">
+    <div class="alert alert-danger" *ngIf=errorStatusModal>
+      <span>{{ errorMsjModal }}</span>
+    </div>
+    <button type="submit" class="btn btn-outline-dark" (click)="guardarMantenimiento()">Save</button>
+  </div>
+</ng-template>
+
+
+
+<hr />
